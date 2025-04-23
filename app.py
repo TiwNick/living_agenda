@@ -1,12 +1,22 @@
 import os
+from models import Task
 
 def show_menu():
     print('1. Create new task')
     print('2. List tasks')
     print('3. Leave\n')
+    choose_one()
+
+def back_menu():
+    input('\nPress any key for back to the menu...')
+    main()
+
+def invalid_option():
+    print('Please insert a valid option!\n')
+    back_menu()    
 
 def show_subtitle(texto):
-    os.system('cls')
+    os.system('clear')
     linha = '*' * (len(texto))
     print(linha)
     print(texto)
@@ -22,21 +32,13 @@ def create_task():
     task_desc = input("Describe your task: ")
     task_time = input("How long time you'll take to complete your task?: ")
     task_data = {'title': task_name, 'description': task_desc, 'time to complete': task_time}
-    tasks.append(task_data)
+    list_tasks.append(task_data)
     print(f'The task {task_name} was succesfully registred!')
     back_menu()
 
-def back_menu():
-    input('\nPress any key for back to the menu...')
-    main()
-
-def invalid_option():
-    print('Please insert a valid option!\n')
-    back_menu()
-
 def list_tasks():
-    print(f'{'Nome do restaurante'.ljust(22)} | {'Categoria'.ljust(20)} | Status')
-    for task in tasks:
+    print(f'{'Title'.ljust(22)} | {'Description'.ljust(20)} | Time to complete')
+    for task in task:
         task_name = task['title']
         task_description = task['description']
         task_time = task['time']
@@ -62,7 +64,7 @@ def choose_one():
 
 
 def main():
-    os.system('cls')
+    os.system('clear')
     #exibir_nome_programa()
     show_menu()
     #escolher_opcao()

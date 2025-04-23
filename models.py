@@ -19,4 +19,4 @@ class Task:
         '''Funcao para listar as tarefas'''
         print(f'{'Task'.ljust(25)} | {'Description'.ljust(25)} | {'Time'.ljust(25)}')
         for task in cls.tasks:
-            print(f'{tasks._title.ljust(25)} | {tasks._description.ljust(25)} | {str(tasks.time).ljust(25)}')
+            print(f'{task._title.ljust(25)} | {task._description.ljust(25)} | {str(task.time).ljust(25)}')
