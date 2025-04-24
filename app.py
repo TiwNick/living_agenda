@@ -1,11 +1,15 @@
 import os
 from models import Task
 
+tasks = [{'title':'test','description':'test','time to complete':'1 minute'},
+         {'title':'test two','description':'test two','time to complete':'2 minutes'},
+         {'title':'test three','description':'test three','time to complete':'3 minutes'}]
+
 def show_menu():
-    print('1. Create new task')
-    print('2. List tasks')
-    print('3. Leave\n')
-    choose_one()
+    print('1. create new task')
+    print('2. list tasks')
+    print('3. edit task')
+    print('4. leave\n')
 
 def back_menu():
     input('\nPress any key for back to the menu...')
@@ -28,27 +32,66 @@ def leave_program():
 
 
 def create_task():
-    task_name = input("What's your task's title?: ")
-    task_desc = input("Describe your task: ")
-    task_time = input("How long time you'll take to complete your task?: ")
+    task_name = input("what's ur task's title?: ")
+    task_desc = input("describe ur task: ")
+    task_time = input("how long time you'll take to complete ur task?: ")
     task_data = {'title': task_name, 'description': task_desc, 'time to complete': task_time}
-    list_tasks.append(task_data)
-    print(f'The task {task_name} was succesfully registred!')
+    tasks.append(task_data)
+    print(f'the task {task_name} was succesfully registred!')
     back_menu()
 
 def list_tasks():
-    print(f'{'Title'.ljust(22)} | {'Description'.ljust(20)} | Time to complete')
-    for task in task:
+    print(f'{'title'.ljust(22)} | {'description'.ljust(20)} | time to complete')
+    for task in tasks:
         task_name = task['title']
         task_description = task['description']
-        task_time = task['time']
+        task_time = task['time to complete']
         print(f'- {task_name.ljust(20)} | {task_description.ljust(20)} | {task_time}')
 
     back_menu()
 
+def edit_task():
+    if not tasks:
+        print("No tasks available to edit.")
+        back_menu()
+        return
+
+    print("\nWhich task do you want to edit?\n")
+    for i, task in enumerate(tasks):
+        print(f"{i + 1}. {task['title']}")
+
+    chosen = input("\nEnter the task number: ")
+
+    if not chosen.isdigit():
+        print("Invalid input. Please enter a number.")
+        back_menu()
+        return
+
+    index = int(chosen) - 1
+
+    if index < 0 or index >= len(tasks):
+        print("Invalid task number.")
+        back_menu()
+        return
+
+    task = tasks[index]
+
+    print("\nLeave blank if you don't want to change the field.")
+    new_title = input(f"New title [{task['title']}]: ") or task['title']
+    new_desc = input(f"New description [{task['description']}]: ") or task['description']
+    new_time = input(f"New time to complete [{task['time']}]: ") or task['time']
+
+    task['title'] = new_title
+    task['description'] = new_desc
+    task['time'] = new_time
+
+    print("\n✅ Task updated successfully!")
+    back_menu()
+
+
 def choose_one():
     try:
-        choosen = int(input('Choose one option: '))
+        choosen = int(input('choose one option: '))
         # choosen = int(choosen)
 
         if choosen == 1: 
@@ -56,6 +99,8 @@ def choose_one():
         elif choosen == 2: 
             list_tasks()
         elif choosen == 3: 
+            edit_task()
+        elif choosen == 4: 
             leave_program()
         else: 
             invalid_option()
@@ -68,6 +113,7 @@ def main():
     #exibir_nome_programa()
     show_menu()
     #escolher_opcao()
+    choose_one()
 
 if __name__ == '__main__':
     main()
