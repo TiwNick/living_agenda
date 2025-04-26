@@ -1,7 +1,10 @@
 import os
-from models import Task
 
-tasks = [{'title':'test','description':'test','time to complete':'1 minute'},
+tasks = [{'title':'TESTE','description':'TESTE','time to complete':'1 MINUTES'},
+         {'title':'TESTE TWO','description':'TESTE TWO','time to complete':'2 MINUTES'},
+         {'title':'TESTE THREE','description':'TESTE THREE','time to complete':'3 MINUTES'}]
+
+subtasks = [{'title':'test','description':'test','time to complete':'1 minute'},
          {'title':'test two','description':'test two','time to complete':'2 minutes'},
          {'title':'test three','description':'test three','time to complete':'3 minutes'}]
 
@@ -9,7 +12,9 @@ def show_menu():
     print('1. create new task')
     print('2. list tasks')
     print('3. edit task')
-    print('4. leave\n')
+    print('4. leave')
+    print('5. create subtask (NP&F)')
+    print('6. create group (NP&F)\n')
 
 def back_menu():
     input('\nPress any key for back to the menu...')
@@ -50,9 +55,9 @@ def list_tasks():
 
     back_menu()
 
-def edit_task():
-    if not tasks:
-        print("No tasks available to edit.")
+def editing_act():
+    if not tasks or not subtasks:
+        print("No activity available to edit.")
         back_menu()
         return
 
