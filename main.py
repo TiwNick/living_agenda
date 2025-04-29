@@ -1,4 +1,14 @@
 import os
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello, Render!"}
+
+
+
 
 tasks = [{'title':'TESTE','description':'TESTE','time to complete':'1 MINUTES'},
          {'title':'TESTE TWO','description':'TESTE TWO','time to complete':'2 MINUTES'},
@@ -104,7 +114,7 @@ def choose_one():
         elif choosen == 2: 
             list_tasks()
         elif choosen == 3: 
-            edit_task()
+            editing_act()
         elif choosen == 4: 
             leave_program()
         else: 
