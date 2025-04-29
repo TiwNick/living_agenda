@@ -1,6 +1,5 @@
 import os
 from fastapi import FastAPI
-from mangum import Mangum
 
 app = FastAPI(
     title="Living Agenda API",
@@ -9,7 +8,7 @@ app = FastAPI(
     contact={
         "name": "Nick",
         "url": "https://github.com/TiwNick",
-        "email": "seuemail@example.com",
+        "email": "nicollaslucena1505@gmail.com",
     },
 )
 
