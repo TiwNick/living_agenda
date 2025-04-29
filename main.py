@@ -3,7 +3,7 @@ from fastapi import FastAPI
 
 app = FastAPI(
     title="Living Agenda API",
-    description="API para gerenciamento de tarefas da Living Agenda.",
+    description="API para gerenciamento de tarefas",
     version="1.0.0",
     contact={
         "name": "Nick",
@@ -12,9 +12,10 @@ app = FastAPI(
     },
 )
 
+# Rotas de exemplo
 @app.get("/")
 def read_root():
-    return {"message": "Hello, Render!"}
+    return {"message": "Hello from Render"}
 
 tasks = [{'title':'TESTE','description':'TESTE','time to complete':'1 MINUTES'},
          {'title':'TESTE TWO','description':'TESTE TWO','time to complete':'2 MINUTES'},
