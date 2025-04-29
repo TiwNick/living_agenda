@@ -1,14 +1,21 @@
 import os
 from fastapi import FastAPI
+from mangum import Mangum
 
-app = FastAPI()
+app = FastAPI(
+    title="Living Agenda API",
+    description="API para gerenciamento de tarefas da Living Agenda.",
+    version="1.0.0",
+    contact={
+        "name": "Nick",
+        "url": "https://github.com/TiwNick",
+        "email": "seuemail@example.com",
+    },
+)
 
 @app.get("/")
 def read_root():
     return {"message": "Hello, Render!"}
-
-
-
 
 tasks = [{'title':'TESTE','description':'TESTE','time to complete':'1 MINUTES'},
          {'title':'TESTE TWO','description':'TESTE TWO','time to complete':'2 MINUTES'},
@@ -56,7 +63,7 @@ def create_task():
     back_menu()
 
 def list_tasks():
-    print(f'{'title'.ljust(22)} | {'description'.ljust(20)} | time to complete')
+    print(f"{'title'.ljust(22)} | {'description'.ljust(20)} | time to complete")
     for task in tasks:
         task_name = task['title']
         task_description = task['description']
