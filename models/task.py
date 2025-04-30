@@ -18,6 +18,6 @@ class Task(ABC):
     @classmethod
     def list_tasks(clear):
         '''Funcao para listar as tarefas'''
-        print(f'{'title'.ljust(25)} | {'description'.ljust(25)} | {'time to complete'.ljust(25)}')
+        print(f"{'title'.ljust(25)} | {'description'.ljust(25)} | {'time to complete'.ljust(25)}")
         for task in clear.tasks:
             print(f'{task._title.ljust(25)} | {task._description.ljust(25)} | {str(task.time).ljust(25)}')
