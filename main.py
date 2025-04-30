@@ -1,5 +1,9 @@
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import List
+from models.task import Task
+from models.subtask import Subtask
 
 app = FastAPI(
     title="Living Agenda API",
@@ -12,10 +16,40 @@ app = FastAPI(
     },
 )
 
-# Rotas de exemplo
-@app.get("/")
+# ===== Banco de dados em memória (temporário) =====
+#tasks: List[Task] = [
+ #   Task(title="TESTE", description="TESTE", time_to_complete="1 MINUTES"),
+  #  Task(title="TESTE TWO", description="TESTE TWO", time_to_complete="2 MINUTES"),
+   # Task(title="TESTE THREE", description="TESTE THREE", time_to_complete="3 MINUTES")
+#]
+
+# ===== Rotas =====
+@app.get("/", tags=["Root"])
 def read_root():
     return {"message": "Hello from Render"}
+
+@app.get("/tasks", response_model=List[Task], tags=["Tasks"])
+def get_tasks():
+    return tasks
+
+@app.post("/tasks", response_model=Task, tags=["Tasks"])
+def create_task(task: Task):
+    tasks.append(task)
+    return task
+
+@app.put("/tasks/{task_id}", response_model=Task, tags=["Tasks"])
+def update_task(task_id: int, updated_task: Task):
+    if task_id < 0 or task_id >= len(tasks):
+        raise HTTPException(status_code=404, detail="Task not found")
+    tasks[task_id] = updated_task
+    return updated_task
+
+@app.delete("/tasks/{task_id}", tags=["Tasks"])
+def delete_task(task_id: int):
+    if task_id < 0 or task_id >= len(tasks):
+        raise HTTPException(status_code=404, detail="Task not found")
+    deleted = tasks.pop(task_id)
+    return {"message": f"Task '{deleted.title}' deleted successfully"}
 
 tasks = [{'title':'TESTE','description':'TESTE','time to complete':'1 MINUTES'},
          {'title':'TESTE TWO','description':'TESTE TWO','time to complete':'2 MINUTES'},
@@ -29,9 +63,7 @@ def show_menu():
     print('1. create new task')
     print('2. list tasks')
     print('3. edit task')
-    print('4. leave')
-    print('5. create subtask (NP&F)')
-    print('6. create group (NP&F)\n')
+    print('4. leave\n')
 
 def back_menu():
     input('\nPress any key for back to the menu...')
