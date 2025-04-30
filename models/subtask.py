@@ -18,6 +18,6 @@ class Subtask(Task):
     @classmethod
     def list_subtasks(clear):
         '''Funcao para listar as subtasks'''
-        print(f'{'title'.ljust(25)} | {'description'.ljust(25)} | {'time to complete'.ljust(25)}')
+        print(f"{'title'.ljust(25)} | {'description'.ljust(25)} | {'time to complete'.ljust(25)}")
         for subtask in clear.subtasks:
             print(f'{subtask._title.ljust(25)} | {subtask._description.ljust(25)} | {str(subtask.time).ljust(25)}')
